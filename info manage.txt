@@ -1,0 +1,48 @@
+class InformationManagementExpertSystem:
+    def __init__(self):
+        # A small database of books (title, author, availability)
+        self.books = {
+            "The Great Gatsby": {"author": "F. Scott Fitzgerald", "available": True},
+            "To Kill a Mockingbird": {"author": "Harper Lee", "available": False},
+            "1984": {"author": "George Orwell", "available": True},
+            "Pride and Prejudice": {"author": "Jane Austen", "available": True},
+            "The Catcher in the Rye": {"author": "J.D. Salinger", "available": False},
+        }
+
+    def search_by_title(self, title):
+        book = self.books.get(title)
+        if book:
+            return f"Title: {title}, Author: {book['author']}, Available: {book['available']}"
+        return "Sorry, no book found with that title."
+
+    def search_by_author(self, author):
+        found_books = [title for title, details in self.books.items() if details["author"].lower() == author.lower()]
+        if found_books:
+            return f"Books by {author}: " + ", ".join(found_books)
+        return "Sorry, no books found by that author."
+
+    def query(self):
+        print("Welcome to the Library Information Management System.")
+        print("You can search for books by title or author. Type 'exit' to end the session.")
+        
+        while True:
+            user_input = input("What would you like to do? (search by title / search by author / exit): ").lower()
+
+            if user_input == "exit":
+                print("Goodbye! Have a great day!")
+                break
+            elif user_input == "search by title":
+                title = input("Enter the book title: ")
+                print(self.search_by_title(title))
+            elif user_input == "search by author":
+                author = input("Enter the author's name: ")
+                print(self.search_by_author(author))
+            else:
+                print("Sorry, I didn't understand that. Please try again.")
+
+# Example usage
+def run_system():
+    system = InformationManagementExpertSystem()
+    system.query()
+
+run_system()

@@ -1,0 +1,28 @@
+class Chatbot:
+    def __init__(self):
+        self.responses = {
+            "hi": "Hello! How can I help you today?",
+            "hello": "Hi there! How can I assist you?",
+            "store hours": "Our store is open from 9 AM to 9 PM every day.",
+            "product availability": "Please provide the product name, and I\'ll check availability for you.",  # Fixed quote
+            "help": "You can ask me about store hours, product availability, or anything else you need assistance with.",
+            "bye": "Goodbye! Have a great day!",
+        }
+
+    def get_response(self, user_input):
+        user_input = user_input.lower()
+        return self.responses.get(user_input, "Sorry, I didn't understand that. Can you rephrase?")
+
+def chat():
+    print("Welcome to our store chatbot! Type 'bye' to exit.")
+    bot = Chatbot()
+
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "bye":
+            print("Bot:", bot.get_response(user_input))
+            break
+        print("Bot:", bot.get_response(user_input))
+
+# Start the chatbot
+chat()

@@ -1,0 +1,28 @@
+def job_scheduling(jobs):
+    # Sort jobs by profit descending
+    jobs.sort(key=lambda x: x[2], reverse=True)
+
+    n = max(job[1] for job in jobs)  # max deadline
+    schedule = [None] * n
+
+    for job_id, deadline, profit in jobs:
+        for t in range(min(n, deadline) - 1, -1, -1):
+            if schedule[t] is None:
+                schedule[t] = (job_id, profit)
+                break
+
+    total_profit = sum(job[1] for job in schedule if job)
+    return schedule, total_profit
+
+# Format: (Job ID, Deadline, Profit)
+jobs = [
+    ('A', 2, 100),
+    ('B', 1, 19),
+    ('C', 2, 27),
+    ('D', 1, 25),
+    ('E', 3, 15)
+]
+
+schedule, profit = job_scheduling(jobs)
+print("Scheduled Jobs:", [job[0] for job in schedule if job])
+print("Total Profit:", profit)

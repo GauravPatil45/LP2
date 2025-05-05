@@ -1,0 +1,37 @@
+class StockMarketExpertSystem:
+    def __init__(self):
+        self.stocks = {
+            "AAPL": {"trend": "up", "volume": "high", "news": "positive"},
+            "GOOG": {"trend": "down", "volume": "low", "news": "neutral"},
+            "AMZN": {"trend": "up", "volume": "medium", "news": "positive"},
+            "TSLA": {"trend": "down", "volume": "high", "news": "negative"},
+        }
+
+    def evaluate_stock(self, stock_symbol):
+        stock = self.stocks.get(stock_symbol.upper())
+        if stock:
+            if stock["trend"] == "up" and stock["volume"] in ["high", "medium"] and stock["news"] == "positive":
+                return f"Stock {stock_symbol.upper()} is a good buy!"
+            elif stock["trend"] == "down" and stock["volume"] == "low" and stock["news"] == "negative":
+                return f"Stock {stock_symbol.upper()} is a good sell."
+            else:
+                return f"Stock {stock_symbol.upper()} is stable. Monitor further."
+        else:
+            return "Sorry, the stock symbol was not found."
+
+    def trade_advice(self):
+        print("Welcome to the Stock Market Trading Expert System.")
+        
+        while True:
+            stock_symbol = input("Enter stock symbol (e.g., AAPL, GOOG) or 'exit' to quit: ")
+            if stock_symbol.lower() == 'exit':
+                print("Goodbye!")
+                break
+            print(self.evaluate_stock(stock_symbol))
+
+# Example usage
+def run_system():
+    system = StockMarketExpertSystem()
+    system.trade_advice()
+
+run_system()

@@ -1,0 +1,32 @@
+class HelpDeskExpertSystem:
+    def __init__(self):
+        # A small database of common issues and their solutions
+        self.issues = {
+            "internet not working": "1. Check if the modem is plugged in. \n2. Restart the modem. \n3. Contact your ISP if the issue persists.",
+            "printer not working": "1. Check if the printer is powered on. \n2. Ensure paper is loaded in the tray. \n3. Check for error messages on the printer screen.",
+            "computer slow": "1. Close unused applications. \n2. Run a virus scan. \n3. Restart the computer.",
+            "email not sending": "1. Check your internet connection. \n2. Ensure the email address is correct. \n3. Check for any server issues from your email provider.",
+            "software crashing": "1. Ensure your software is up to date. \n2. Restart the software. \n3. Reinstall the software if the problem persists.",
+        }
+
+    def diagnose(self):
+        print("Welcome to the Help Desk Management System.")
+        print("You can ask about common technical issues. Type 'exit' to end the session.")
+        
+        while True:
+            user_input = input("What issue are you facing? (internet not working, printer not working, computer slow, etc.): ").lower()
+
+            if user_input == "exit":
+                print("Goodbye! Hope the issues are resolved.")
+                break
+            elif user_input in self.issues:
+                print(f"Solution for '{user_input}':\n{self.issues[user_input]}")
+            else:
+                print("Sorry, we don't have a solution for that issue. Please contact support directly.")
+
+# Example usage
+def run_system():
+    system = HelpDeskExpertSystem()
+    system.diagnose()
+
+run_system()

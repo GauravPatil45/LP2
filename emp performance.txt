@@ -1,0 +1,45 @@
+class EmployeePerformanceExpertSystem:
+    def __init__(self):
+        self.performance_criteria = {
+            "work quality": {"excellent": 5, "good": 4, "average": 3, "poor": 2},
+            "punctuality": {"excellent": 5, "good": 4, "average": 3, "poor": 2},
+            "teamwork": {"excellent": 5, "good": 4, "average": 3, "poor": 2},
+        }
+
+    def evaluate_performance(self, work_quality, punctuality, teamwork):
+        score = (self.performance_criteria["work quality"][work_quality.lower()] +
+                 self.performance_criteria["punctuality"][punctuality.lower()] +
+                 self.performance_criteria["teamwork"][teamwork.lower()])
+
+        if score >= 14:
+            return "Outstanding performance"
+        elif score >= 11:
+            return "Good performance"
+        elif score >= 8:
+            return "Average performance"
+        else:
+            return "Needs improvement"
+
+    def evaluate(self):
+        print("Welcome to the Employee Performance Evaluation System.")
+        print("Please rate the employee's performance in the following categories: excellent, good, average, or poor.")
+        
+        while True:
+            work_quality = input("Rate work quality: ")
+            punctuality = input("Rate punctuality: ")
+            teamwork = input("Rate teamwork: ")
+
+            result = self.evaluate_performance(work_quality, punctuality, teamwork)
+            print(f"Performance Evaluation: {result}")
+            
+            continue_evaluation = input("Would you like to evaluate another employee? (yes/no): ").lower()
+            if continue_evaluation == "no":
+                print("Goodbye!")
+                break
+
+# Example usage
+def run_system():
+    system = EmployeePerformanceExpertSystem()
+    system.evaluate()
+
+run_system()

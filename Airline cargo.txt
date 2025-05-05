@@ -1,0 +1,35 @@
+class AirlineSchedulingExpertSystem:
+    def __init__(self):
+        # A small database of flight schedules and cargo capacity
+        self.flights = {
+            "Flight A": {"available_seats": 50, "cargo_capacity": 2000, "cargo_loaded": 1500},
+            "Flight B": {"available_seats": 30, "cargo_capacity": 3000, "cargo_loaded": 2500},
+            "Flight C": {"available_seats": 100, "cargo_capacity": 4000, "cargo_loaded": 3500},
+        }
+
+    def check_availability(self, flight_name, cargo_weight):
+        flight = self.flights.get(flight_name)
+        if flight:
+            if flight["cargo_capacity"] - flight["cargo_loaded"] >= cargo_weight:
+                return f"Cargo can be loaded on {flight_name}. Available space: {flight['cargo_capacity'] - flight['cargo_loaded']} kg."
+            else:
+                return f"Not enough cargo space on {flight_name}. Available space: {flight['cargo_capacity'] - flight['cargo_loaded']} kg."
+        return "Sorry, flight not found."
+
+    def schedule_cargo(self):
+        print("Welcome to the Airline Scheduling and Cargo Management System.")
+        
+        while True:
+            flight_name = input("Enter flight name (e.g., Flight A, Flight B) or 'exit' to quit: ")
+            if flight_name.lower() == 'exit':
+                print("Goodbye!")
+                break
+            cargo_weight = float(input("Enter cargo weight (in kg): "))
+            print(self.check_availability(flight_name, cargo_weight))
+
+# Example usage
+def run_system():
+    system = AirlineSchedulingExpertSystem()
+    system.schedule_cargo()
+
+run_system()

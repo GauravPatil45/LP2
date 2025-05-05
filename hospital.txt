@@ -1,0 +1,56 @@
+class MedicalExpertSystem:
+    def __init__(self):
+        # Rule-based symptoms and corresponding conditions
+        self.rules = {
+            "fever": {
+                "cold": "You might have a cold. Please take rest and hydrate.",
+                "flu": "It could be the flu. You should consult a doctor for antiviral medication.",
+                "covid": "You might have COVID-19. Please get a test and self-isolate."
+            },
+            "cough": {
+                "cold": "It might be a common cold. Drink warm fluids.",
+                "flu": "This could be flu. Rest and consult a doctor if symptoms worsen.",
+                "covid": "Cough is a common symptom of COVID-19. Please get tested."
+            },
+            "headache": {
+                "migraine": "It could be a migraine. Try resting in a dark, quiet room.",
+                "tension": "This might be a tension headache. Consider relaxation techniques and hydration.",
+                "covid": "A headache could also be a symptom of COVID-19. Please get tested."
+            },
+            "shortness of breath": {
+                "covid": "This could be a sign of COVID-19. Seek immediate medical attention.",
+                "asthma": "This might be related to asthma. Make sure to use your inhaler."
+            }
+        }
+
+    def diagnose(self):
+        print("Welcome to the Medical Expert System. Please answer the following questions.")
+        
+        symptoms = input("Do you have any of the following symptoms: fever, cough, headache, shortness of breath? (Yes/No): ").lower()
+        if symptoms != "yes":
+            print("Okay, please consult a healthcare professional for further advice.")
+            return
+        
+        symptom = input("Please describe your primary symptom (fever, cough, headache, shortness of breath): ").lower()
+
+        if symptom not in self.rules:
+            print("Sorry, we cannot provide advice on that symptom. Please consult a healthcare professional.")
+            return
+
+        condition_found = False
+        for condition, advice in self.rules[symptom].items():
+            user_input = input(f"Do you have {condition} symptoms? (Yes/No): ").lower()
+            if user_input == "yes":
+                print(f"Diagnosis: {condition}. {advice}")
+                condition_found = True
+                break
+        
+        if not condition_found:
+            print("No specific condition found based on your symptoms. Please consult a healthcare professional.")
+
+# Example usage
+def run_system():
+    system = MedicalExpertSystem()
+    system.diagnose()
+
+run_system()
